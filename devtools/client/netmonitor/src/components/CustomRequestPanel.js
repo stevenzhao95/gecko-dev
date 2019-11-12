@@ -134,12 +134,15 @@ class CustomRequestPanel extends Component {
           ? this.parseRequestText(customQueryValue, ".+?", "=")
           : [];
         // Write out a list of query params into a query string
+        console.log(queryArray);
         const queryString = queryArray
           .map(({ name, value }) => name + "=" + value)
           .join("&");
+        console.log(queryString);
         const url = queryString
           ? [request.url.split("?")[0], queryString].join("?")
           : request.url.split("?")[0];
+        console.log(url);
         // Remove temp customQueryValue while query string is parsable
         if (
           customQueryValue === "" ||
