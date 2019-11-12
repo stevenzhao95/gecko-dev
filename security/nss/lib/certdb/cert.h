@@ -453,7 +453,7 @@ extern SECStatus CERT_CompleteCRLDecodeEntries(CERTSignedCrl *crl);
 extern CERTSignedCrl *CERT_ImportCRL(CERTCertDBHandle *handle, SECItem *derCRL,
                                      char *url, int type, void *wincx);
 
-extern void CERT_DestroyCrl(CERTSignedCrl *crl);
+// extern void CERT_DestroyCrl(CERTSignedCrl *crl);
 
 /* this is a hint to flush the CRL cache. crlKey is the DER subject of
    the issuer (CA). */
