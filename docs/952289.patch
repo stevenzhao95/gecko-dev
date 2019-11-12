@@ -1,0 +1,50 @@
+diff --git a/docs/a3.md b/docs/a3.md
+new file mode 100644
+index 0000000..e69de29
+diff --git a/security/nss/lib/certdb/cert.h b/security/nss/lib/certdb/cert.h
+index 1981b8f..4e6c763 100644
+--- a/security/nss/lib/certdb/cert.h
++++ b/security/nss/lib/certdb/cert.h
+@@ -453,7 +453,6 @@ extern SECStatus CERT_CompleteCRLDecodeEntries(CERTSignedCrl *crl);
+ extern CERTSignedCrl *CERT_ImportCRL(CERTCertDBHandle *handle, SECItem *derCRL,
+                                      char *url, int type, void *wincx);
+ 
+-extern void CERT_DestroyCrl(CERTSignedCrl *crl);
+ 
+ /* this is a hint to flush the CRL cache. crlKey is the DER subject of
+    the issuer (CA). */
+diff --git a/security/nss/lib/certdb/certdb.c b/security/nss/lib/certdb/certdb.c
+index 4eb6e89..d7bb3b7 100644
+--- a/security/nss/lib/certdb/certdb.c
++++ b/security/nss/lib/certdb/certdb.c
+@@ -2041,14 +2041,6 @@ done:
+     return (nickname);
+ }
+ 
+-/* CERT_Import_CAChain moved to certhigh.c */
+-
+-void
+-CERT_DestroyCrl(CERTSignedCrl *crl)
+-{
+-    SEC_DestroyCrl(crl);
+-}
+-
+ static int
+ cert_Version(CERTCertificate *cert)
+ {
+diff --git a/security/nss/lib/libpkix/pkix_pl_nss/pki/pkix_pl_crl.c b/security/nss/lib/libpkix/pkix_pl_nss/pki/pkix_pl_crl.c
+index b83db35..4f9a072 100644
+--- a/security/nss/lib/libpkix/pkix_pl_nss/pki/pkix_pl_crl.c
++++ b/security/nss/lib/libpkix/pkix_pl_nss/pki/pkix_pl_crl.c
+@@ -297,9 +297,9 @@ pkix_pl_CRL_Destroy(
+ 
+         crl = (PKIX_PL_CRL*)object;
+ 
+-        PKIX_CRL_DEBUG("\t\tCalling CERT_DestroyCrl\n");
++        PKIX_CRL_DEBUG("\t\tCalling SEC_DestroyCrl\n");
+         if (crl->nssSignedCrl) {
+-            CERT_DestroyCrl(crl->nssSignedCrl);
++            SEC_DestroyCrl(crl->nssSignedCrl);
+         }
+         if (crl->adoptedDerCrl) {
+             SECITEM_FreeItem(crl->adoptedDerCrl, PR_TRUE);
