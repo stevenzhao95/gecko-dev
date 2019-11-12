@@ -2041,14 +2041,6 @@ done:
     return (nickname);
 }
 
-/* CERT_Import_CAChain moved to certhigh.c */
-
-// void
-// CERT_DestroyCrl(CERTSignedCrl *crl)
-// {
-//     SEC_DestroyCrl(crl);
-// }
-
 static int
 cert_Version(CERTCertificate *cert)
 {
