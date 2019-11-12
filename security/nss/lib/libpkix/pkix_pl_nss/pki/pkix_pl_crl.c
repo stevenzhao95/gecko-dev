@@ -297,9 +297,9 @@ pkix_pl_CRL_Destroy(
 
         crl = (PKIX_PL_CRL*)object;
 
-        PKIX_CRL_DEBUG("\t\tCalling CERT_DestroyCrl\n");
+        PKIX_CRL_DEBUG("\t\tCalling SEC_DestroyCrl\n");
         if (crl->nssSignedCrl) {
-            CERT_DestroyCrl(crl->nssSignedCrl);
+            SEC_DestroyCrl(crl->nssSignedCrl);
         }
         if (crl->adoptedDerCrl) {
             SECITEM_FreeItem(crl->adoptedDerCrl, PR_TRUE);
